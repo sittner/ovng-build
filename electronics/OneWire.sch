@@ -1,0 +1,330 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 6 9
+Title "OpenVarioNG BaseBoard"
+Date "2019-04-18"
+Rev "1.0"
+Comp "LSV Neuwied e.V."
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Transistor_FET:BSS84 Q801
+U 1 1 5CCC5C67
+P 7200 3900
+F 0 "Q801" H 7405 3946 50  0000 L CNN
+F 1 "BSS84" H 7405 3855 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7400 3825 50  0001 L CIN
+F 3 "http://assets.nexperia.com/documents/data-sheet/BSS84.pdf" H 7200 3900 50  0001 L CNN
+	1    7200 3900
+	1    0    0    1   
+$EndComp
+$Comp
+L mds-misc:DS2482-100 U802
+U 1 1 5CCC6AEB
+P 6350 4000
+F 0 "U802" H 6200 4500 50  0000 C CNN
+F 1 "DS2482-100" H 6050 4400 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 6300 4500 50  0001 C CNN
+F 3 "https://datasheets.maximintegrated.com/en/ds/DS2482-100.pdf" H 6400 3700 50  0001 C CNN
+	1    6350 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R804
+U 1 1 5CCC6BC4
+P 7300 3250
+F 0 "R804" H 7370 3296 50  0000 L CNN
+F 1 "100R" H 7370 3205 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 7230 3250 50  0001 C CNN
+F 3 "~" H 7300 3250 50  0001 C CNN
+	1    7300 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7300 3400 7300 3700
+Text HLabel 3750 2750 0    50   Input ~ 0
++5V
+Text HLabel 3750 3250 0    50   Input ~ 0
++3V3
+$Comp
+L Interface:PCA9306 U?
+U 1 1 5CCC7B02
+P 4450 3850
+AR Path="/5CBD860B/5CCC7B02" Ref="U?"  Part="1" 
+AR Path="/5CCC55F2/5CCC7B02" Ref="U801"  Part="1" 
+F 0 "U801" H 4450 4600 50  0000 C CNN
+F 1 "PCA9306" H 4450 4500 50  0000 C CNN
+F 2 "Package_SO:SSOP-8_2.95x2.8mm_P0.65mm" H 4050 4200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/pca9306.pdf" H 4150 4300 50  0001 C CNN
+	1    4450 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5CCC7B09
+P 5750 3250
+AR Path="/5CBD860B/5CCC7B09" Ref="R?"  Part="1" 
+AR Path="/5CCC55F2/5CCC7B09" Ref="R803"  Part="1" 
+F 0 "R803" H 5820 3296 50  0000 L CNN
+F 1 "10k" H 5820 3205 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 5680 3250 50  0001 C CNN
+F 3 "~" H 5750 3250 50  0001 C CNN
+	1    5750 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5CCC7B10
+P 5450 3250
+AR Path="/5CBD860B/5CCC7B10" Ref="R?"  Part="1" 
+AR Path="/5CCC55F2/5CCC7B10" Ref="R802"  Part="1" 
+F 0 "R802" H 5520 3296 50  0000 L CNN
+F 1 "10k" H 5520 3205 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 5380 3250 50  0001 C CNN
+F 3 "~" H 5450 3250 50  0001 C CNN
+	1    5450 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5CCC7B2B
+P 4950 3000
+AR Path="/5CBD860B/5CCC7B2B" Ref="R?"  Part="1" 
+AR Path="/5CCC55F2/5CCC7B2B" Ref="R801"  Part="1" 
+F 0 "R801" H 4880 2954 50  0000 R CNN
+F 1 "200k" H 4880 3045 50  0000 R CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 4880 3000 50  0001 C CNN
+F 3 "~" H 4950 3000 50  0001 C CNN
+	1    4950 3000
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4050 3850 3750 3850
+Wire Wire Line
+	4050 3950 3750 3950
+Wire Wire Line
+	4450 4350 4450 4550
+Text HLabel 3750 3950 0    50   BiDi ~ 0
+SDA
+Text HLabel 3750 3850 0    50   Input ~ 0
+SCL
+$Comp
+L Device:C C?
+U 1 1 5CCC7B3B
+P 4950 4300
+AR Path="/5CBB96A8/5CCC7B3B" Ref="C?"  Part="1" 
+AR Path="/5CBD860B/5CCC7B3B" Ref="C?"  Part="1" 
+AR Path="/5CCC55F2/5CCC7B3B" Ref="C802"  Part="1" 
+F 0 "C802" H 4835 4254 50  0000 R CNN
+F 1 "100n" H 4835 4345 50  0000 R CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 4988 4150 50  0001 C CNN
+F 3 "~" H 4950 4300 50  0001 C CNN
+	1    4950 4300
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4950 4450 4950 4550
+Wire Wire Line
+	4950 4150 4950 3750
+Wire Wire Line
+	4850 3750 4950 3750
+Connection ~ 4950 3750
+Wire Wire Line
+	4950 3750 4950 3250
+Wire Wire Line
+	4550 3250 4950 3250
+Wire Wire Line
+	4550 3250 4550 3350
+$Comp
+L Device:C C?
+U 1 1 5CCCB4FB
+P 3950 4300
+AR Path="/5CBB96A8/5CCCB4FB" Ref="C?"  Part="1" 
+AR Path="/5CBD860B/5CCCB4FB" Ref="C?"  Part="1" 
+AR Path="/5CCC55F2/5CCCB4FB" Ref="C801"  Part="1" 
+F 0 "C801" H 3835 4254 50  0000 R CNN
+F 1 "100n" H 3835 4345 50  0000 R CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 3988 4150 50  0001 C CNN
+F 3 "~" H 3950 4300 50  0001 C CNN
+	1    3950 4300
+	1    0    0    1   
+$EndComp
+Text HLabel 3750 4550 0    50   UnSpc ~ 0
+GND
+Wire Wire Line
+	3950 4450 3950 4550
+Wire Wire Line
+	3750 3250 3950 3250
+Wire Wire Line
+	4350 3250 4350 3350
+Wire Wire Line
+	3950 4150 3950 3250
+Connection ~ 3950 3250
+Wire Wire Line
+	3950 3250 4350 3250
+Wire Wire Line
+	4850 3850 5450 3850
+Wire Wire Line
+	5450 3850 5450 3400
+Wire Wire Line
+	4850 3950 5750 3950
+Wire Wire Line
+	5750 3950 5750 3400
+Wire Wire Line
+	5750 3950 5850 3950
+Connection ~ 5750 3950
+Wire Wire Line
+	6850 3900 7000 3900
+Wire Wire Line
+	6850 4100 7300 4100
+Wire Wire Line
+	6350 4400 6350 4550
+Wire Wire Line
+	3750 2750 4950 2750
+Wire Wire Line
+	4950 2750 4950 2850
+Wire Wire Line
+	4950 3150 4950 3250
+Connection ~ 4950 3250
+Wire Wire Line
+	4950 2750 5450 2750
+Connection ~ 4950 2750
+Connection ~ 5750 2750
+Wire Wire Line
+	5750 2750 6350 2750
+Wire Wire Line
+	5450 2750 5450 3100
+Connection ~ 5450 2750
+Wire Wire Line
+	5450 2750 5750 2750
+Wire Wire Line
+	5750 2750 5750 3100
+Wire Wire Line
+	7300 2750 7300 3100
+Connection ~ 6350 2750
+Wire Wire Line
+	6350 2750 7300 2750
+$Comp
+L Device:Polyfuse F801
+U 1 1 5CCDB52F
+P 7700 3250
+F 0 "F801" H 7788 3296 50  0000 L CNN
+F 1 "300mA" H 7788 3205 50  0000 L CNN
+F 2 "Fuse:Fuse_1812_4532Metric" H 7750 3050 50  0001 L CNN
+F 3 "~" H 7700 3250 50  0001 C CNN
+F 4 "Littelfuse" H 7700 3250 50  0001 C CNN "Manu"
+F 5 "MINISMDC030F-2" H 7700 3250 50  0001 C CNN "PartNo"
+	1    7700 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7800 4000 7700 4000
+Wire Wire Line
+	7700 4000 7700 4200
+Wire Wire Line
+	7700 4200 7800 4200
+Wire Wire Line
+	7700 4200 7700 4550
+Connection ~ 7700 4200
+Wire Wire Line
+	7300 4100 7800 4100
+Connection ~ 7300 4100
+Wire Wire Line
+	7300 2750 7700 2750
+Wire Wire Line
+	7700 2750 7700 3100
+Connection ~ 7300 2750
+Wire Wire Line
+	7700 3400 7700 3900
+Wire Wire Line
+	7700 3900 7800 3900
+Wire Wire Line
+	7700 4550 6950 4550
+Wire Wire Line
+	6350 4550 5750 4550
+Connection ~ 6350 4550
+Wire Wire Line
+	4950 4550 4450 4550
+Connection ~ 4950 4550
+Wire Wire Line
+	4450 4550 3950 4550
+Connection ~ 4450 4550
+Wire Wire Line
+	3950 4550 3750 4550
+Connection ~ 3950 4550
+Wire Wire Line
+	6350 2750 6350 3500
+$Comp
+L Device:C C?
+U 1 1 5CBC7A74
+P 6950 4300
+AR Path="/5CBB96A8/5CBC7A74" Ref="C?"  Part="1" 
+AR Path="/5CBD860B/5CBC7A74" Ref="C?"  Part="1" 
+AR Path="/5CCC55F2/5CBC7A74" Ref="C803"  Part="1" 
+F 0 "C803" H 6835 4254 50  0000 R CNN
+F 1 "100n" H 6835 4345 50  0000 R CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 6988 4150 50  0001 C CNN
+F 3 "~" H 6950 4300 50  0001 C CNN
+	1    6950 4300
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6950 4450 6950 4550
+Connection ~ 6950 4550
+Wire Wire Line
+	6950 4550 6350 4550
+Wire Wire Line
+	6350 3500 6950 3500
+Wire Wire Line
+	6950 3500 6950 4150
+Connection ~ 6350 3500
+Wire Wire Line
+	6350 3500 6350 3600
+$Comp
+L Connector:4P4C J801
+U 1 1 5CB84AB9
+P 8200 4100
+F 0 "J801" H 7870 4196 50  0000 R CNN
+F 1 "OneWire" H 7870 4105 50  0000 R CNN
+F 2 "modusoft:Modular-MEBP4-4S" V 8200 4150 50  0001 C CNN
+F 3 "~" V 8200 4150 50  0001 C CNN
+	1    8200 4100
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 4050 5750 4050
+Wire Wire Line
+	5750 4050 5750 4150
+Connection ~ 5750 4550
+Wire Wire Line
+	5750 4550 4950 4550
+Wire Wire Line
+	5850 4150 5750 4150
+Connection ~ 5750 4150
+Wire Wire Line
+	5750 4150 5750 4550
+Text Notes 6000 4700 0    50   ~ 0
+I2C Address: 0x18
+Connection ~ 5450 3850
+Wire Wire Line
+	5850 3850 5450 3850
+$Comp
+L power:PWR_FLAG #FLG0801
+U 1 1 5CC90B9A
+P 5000 3250
+F 0 "#FLG0801" H 5000 3325 50  0001 C CNN
+F 1 "PWR_FLAG" V 5100 3250 50  0000 L CNN
+F 2 "" H 5000 3250 50  0001 C CNN
+F 3 "~" H 5000 3250 50  0001 C CNN
+	1    5000 3250
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4950 3250 5000 3250
+$EndSCHEMATC

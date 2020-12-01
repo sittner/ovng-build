@@ -1,0 +1,211 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 4 9
+Title "OpenVarioNG BaseBoard"
+Date "2019-04-18"
+Rev "1.0"
+Comp "LSV Neuwied e.V."
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Timer_RTC:DS1307Z+ U501
+U 1 1 5CC176CD
+P 4450 3800
+F 0 "U501" H 4600 4250 50  0000 L CNN
+F 1 "DS1338-33" H 4600 4150 50  0000 L CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 4450 3300 50  0001 C CNN
+F 3 "https://datasheets.maximintegrated.com/en/ds/DS1307.pdf" H 4450 3800 50  0001 C CNN
+	1    4450 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Crystal Y501
+U 1 1 5CC17F7D
+P 3600 3900
+F 0 "Y501" H 3600 4050 50  0000 C CNN
+F 1 "32.768kHz/12.5pF" H 3600 3600 50  0000 C CNN
+F 2 "Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm" H 3600 3900 50  0001 C CNN
+F 3 "~" H 3600 3900 50  0001 C CNN
+F 4 "Geyer" H 3600 3900 50  0001 C CNN "Manu"
+F 5 "KX–327NHT" H 3600 3900 50  0001 C CNN "PartNo"
+	1    3600 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Battery_Cell BT501
+U 1 1 5CC1801D
+P 5200 3850
+F 0 "BT501" H 5318 3946 50  0000 L CNN
+F 1 "CR-1220" H 5318 3855 50  0000 L CNN
+F 2 "modusoft:BatteryHolder_HARWIN_S8411-45R_CR1220" V 5200 3910 50  0001 C CNN
+F 3 "~" V 5200 3910 50  0001 C CNN
+F 4 "Harwin" H 5200 3850 50  0001 C CNN "Manu"
+F 5 "S8411-45R" H 5200 3850 50  0001 C CNN "PartNo"
+	1    5200 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C501
+U 1 1 5CC18092
+P 5500 4050
+F 0 "C501" V 5248 4050 50  0000 C CNN
+F 1 "100n" V 5339 4050 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 5538 3900 50  0001 C CNN
+F 3 "~" H 5500 4050 50  0001 C CNN
+	1    5500 4050
+	-1   0    0    1   
+$EndComp
+Text HLabel 4350 3100 1    50   Input ~ 0
++3V3
+Text HLabel 3850 3700 0    50   BiDi ~ 0
+SDA
+Text HLabel 3850 3600 0    50   Input ~ 0
+SCL
+Wire Wire Line
+	3850 3600 3950 3600
+Wire Wire Line
+	3850 3700 3950 3700
+Text HLabel 3300 4300 0    50   UnSpc ~ 0
+GND
+Wire Wire Line
+	4450 4200 4450 4300
+Wire Wire Line
+	4450 3400 4450 3300
+Wire Wire Line
+	4450 3300 5200 3300
+Wire Wire Line
+	5200 3300 5200 3650
+Wire Wire Line
+	3950 3900 3750 3900
+Wire Wire Line
+	3950 4000 3850 4000
+Wire Wire Line
+	3850 4000 3850 4100
+Wire Wire Line
+	3850 4100 3350 4100
+Wire Wire Line
+	3350 4100 3350 3900
+Wire Wire Line
+	3350 3900 3450 3900
+$Comp
+L Memory_EEPROM:24LC01 U502
+U 1 1 5CCBEC3A
+P 6450 3900
+F 0 "U502" H 6250 4250 50  0000 C CNN
+F 1 "24LC01" H 6200 4150 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 6450 3900 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/21711J.pdf" H 6450 3900 50  0001 C CNN
+	1    6450 3900
+	1    0    0    -1  
+$EndComp
+Text HLabel 6950 3800 2    50   BiDi ~ 0
+SDA
+Text HLabel 6950 3900 2    50   Input ~ 0
+SCL
+Wire Wire Line
+	6450 4200 6450 4300
+Wire Wire Line
+	6450 4300 6950 4300
+Wire Wire Line
+	6950 4300 6950 4000
+Wire Wire Line
+	6950 4000 6850 4000
+Wire Wire Line
+	6850 3900 6950 3900
+Wire Wire Line
+	6950 3800 6850 3800
+Wire Wire Line
+	6450 4300 5950 4300
+Wire Wire Line
+	5950 4300 5950 4000
+Wire Wire Line
+	5950 4000 6050 4000
+Connection ~ 6450 4300
+Wire Wire Line
+	5950 4000 5950 3900
+Wire Wire Line
+	5950 3900 6050 3900
+Connection ~ 5950 4000
+Wire Wire Line
+	5950 3900 5950 3800
+Wire Wire Line
+	5950 3800 6050 3800
+Connection ~ 5950 3900
+$Comp
+L Device:C C502
+U 1 1 5CCC11C7
+P 7250 4050
+F 0 "C502" V 6998 4050 50  0000 C CNN
+F 1 "100n" V 7089 4050 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 7288 3900 50  0001 C CNN
+F 3 "~" H 7250 4050 50  0001 C CNN
+	1    7250 4050
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4450 4300 5200 4300
+Wire Wire Line
+	5200 3950 5200 4300
+Connection ~ 4450 4300
+Wire Wire Line
+	4350 3100 4350 3200
+Wire Wire Line
+	5200 4300 5500 4300
+Wire Wire Line
+	5500 4300 5500 4200
+Connection ~ 5200 4300
+Wire Wire Line
+	5500 3900 5500 3200
+Wire Wire Line
+	5500 3200 4350 3200
+Connection ~ 4350 3200
+Wire Wire Line
+	4350 3200 4350 3400
+Wire Wire Line
+	6950 4300 7250 4300
+Wire Wire Line
+	7250 4300 7250 4200
+Connection ~ 6950 4300
+Wire Wire Line
+	7250 3900 7250 3500
+Wire Wire Line
+	7250 3500 6450 3500
+Connection ~ 6450 3500
+Wire Wire Line
+	6450 3500 6450 3600
+Wire Wire Line
+	5950 4300 5500 4300
+Connection ~ 5950 4300
+Connection ~ 5500 4300
+Wire Wire Line
+	4450 4300 3300 4300
+Wire Wire Line
+	6450 3400 6450 3500
+Text HLabel 6450 3400 1    50   Input ~ 0
++3V3
+Text Notes 4100 4450 0    50   ~ 0
+I2C Address: 0x68
+Text Notes 5950 4450 0    50   ~ 0
+I2C Address: 0x50-0x57
+NoConn ~ 4950 3800
+$Comp
+L power:PWR_FLAG #FLG0501
+U 1 1 5CC8A0B2
+P 5200 3100
+F 0 "#FLG0501" H 5200 3175 50  0001 C CNN
+F 1 "PWR_FLAG" H 5200 3274 50  0000 C CNN
+F 2 "" H 5200 3100 50  0001 C CNN
+F 3 "~" H 5200 3100 50  0001 C CNN
+	1    5200 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5200 3300 5200 3100
+Connection ~ 5200 3300
+$EndSCHEMATC

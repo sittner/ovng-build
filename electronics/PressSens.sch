@@ -1,0 +1,574 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 5 9
+Title "OpenVarioNG BaseBoard"
+Date "2019-04-18"
+Rev "1.0"
+Comp "LSV Neuwied e.V."
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L mds-misc:MS5611 U603
+U 1 1 5CBB9727
+P 4750 2300
+F 0 "U603" H 4900 2750 50  0000 C CNN
+F 1 "MS5611" H 4950 2650 50  0000 C CNN
+F 2 "Package_LGA:LGA-8_3x5mm_P1.25mm" H 4700 2800 50  0001 C CNN
+F 3 "www.st.com/resource/en/datasheet/lps25hb.pdf" H 4800 2000 50  0001 C CNN
+	1    4750 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Regulator_Linear:MCP1700-3302E_SOT23 U601
+U 1 1 5CBB98C5
+P 2750 1800
+F 0 "U601" H 2750 2042 50  0000 C CNN
+F 1 "MCP1700-3302E_SOT23" H 2750 1951 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2750 2025 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001826C.pdf" H 2750 1800 50  0001 C CNN
+	1    2750 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C601
+U 1 1 5CBB9AAD
+P 2350 2300
+F 0 "C601" H 2465 2346 50  0000 L CNN
+F 1 "1u" H 2465 2255 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 2388 2150 50  0001 C CNN
+F 3 "~" H 2350 2300 50  0001 C CNN
+	1    2350 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C603
+U 1 1 5CBB9ADB
+P 3150 2300
+F 0 "C603" H 3265 2346 50  0000 L CNN
+F 1 "1u" H 3265 2255 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 3188 2150 50  0001 C CNN
+F 3 "~" H 3150 2300 50  0001 C CNN
+	1    3150 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C605
+U 1 1 5CBB9B2D
+P 3650 2300
+F 0 "C605" H 3765 2346 50  0000 L CNN
+F 1 "100n" H 3765 2255 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 3688 2150 50  0001 C CNN
+F 3 "~" H 3650 2300 50  0001 C CNN
+	1    3650 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L_Core_Ferrite L601
+U 1 1 5CBB9BDC
+P 3400 1800
+F 0 "L601" V 3500 1800 50  0000 C CNN
+F 1 "1k@100MHz" V 3350 1800 50  0000 C CNN
+F 2 "Inductor_SMD:L_0805_2012Metric" H 3400 1800 50  0001 C CNN
+F 3 "~" H 3400 1800 50  0001 C CNN
+F 4 "Würth" V 3400 1800 50  0001 C CNN "Manu"
+F 5 "742792096" V 3400 1800 50  0001 C CNN "PartNo"
+	1    3400 1800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2250 1800 2350 1800
+Wire Wire Line
+	2350 2150 2350 1800
+Connection ~ 2350 1800
+Wire Wire Line
+	2350 1800 2450 1800
+Wire Wire Line
+	2350 2450 2350 2800
+Wire Wire Line
+	2750 2100 2750 2800
+Wire Wire Line
+	3150 2800 3150 2450
+Wire Wire Line
+	3650 2450 3650 2800
+Wire Wire Line
+	3050 1800 3150 1800
+Wire Wire Line
+	3150 2150 3150 1800
+Connection ~ 3150 1800
+Wire Wire Line
+	3150 1800 3250 1800
+Wire Wire Line
+	3550 1800 3650 1800
+Wire Wire Line
+	3650 1800 3650 2150
+Wire Wire Line
+	4750 1900 4750 1800
+Wire Wire Line
+	4750 1800 5350 1800
+Wire Wire Line
+	5350 1800 5350 2200
+Wire Wire Line
+	5350 2200 5250 2200
+Wire Wire Line
+	4750 2800 4750 2700
+Wire Wire Line
+	5250 2500 5350 2500
+Wire Wire Line
+	5350 2500 5350 2400
+Wire Wire Line
+	5250 2400 5350 2400
+Wire Wire Line
+	4250 2200 4150 2200
+Wire Wire Line
+	4250 2400 4150 2400
+Wire Wire Line
+	4750 1800 3650 1800
+Connection ~ 4750 1800
+Connection ~ 3650 1800
+$Comp
+L mds-misc:MS5611 U604
+U 1 1 5CBBCE90
+P 4750 4400
+F 0 "U604" H 4900 4850 50  0000 C CNN
+F 1 "MS5611" H 4950 4750 50  0000 C CNN
+F 2 "Package_LGA:LGA-8_3x5mm_P1.25mm" H 4700 4900 50  0001 C CNN
+F 3 "www.st.com/resource/en/datasheet/lps25hb.pdf" H 4800 4100 50  0001 C CNN
+	1    4750 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Regulator_Linear:MCP1700-3302E_SOT23 U602
+U 1 1 5CBBCE96
+P 2750 3900
+F 0 "U602" H 2750 4142 50  0000 C CNN
+F 1 "MCP1700-3302E_SOT23" H 2750 4051 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2750 4125 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001826C.pdf" H 2750 3900 50  0001 C CNN
+	1    2750 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C602
+U 1 1 5CBBCE9C
+P 2350 4400
+F 0 "C602" H 2465 4446 50  0000 L CNN
+F 1 "1u" H 2465 4355 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 2388 4250 50  0001 C CNN
+F 3 "~" H 2350 4400 50  0001 C CNN
+	1    2350 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C604
+U 1 1 5CBBCEA2
+P 3150 4400
+F 0 "C604" H 3265 4446 50  0000 L CNN
+F 1 "1u" H 3265 4355 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 3188 4250 50  0001 C CNN
+F 3 "~" H 3150 4400 50  0001 C CNN
+	1    3150 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C606
+U 1 1 5CBBCEA8
+P 3650 4400
+F 0 "C606" H 3765 4446 50  0000 L CNN
+F 1 "100n" H 3765 4355 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 3688 4250 50  0001 C CNN
+F 3 "~" H 3650 4400 50  0001 C CNN
+	1    3650 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L_Core_Ferrite L602
+U 1 1 5CBBCEB0
+P 3400 3900
+F 0 "L602" V 3500 3900 50  0000 C CNN
+F 1 "1k@100MHz" V 3350 3900 50  0000 C CNN
+F 2 "Inductor_SMD:L_0805_2012Metric" H 3400 3900 50  0001 C CNN
+F 3 "~" H 3400 3900 50  0001 C CNN
+F 4 "Würth" V 3400 3900 50  0001 C CNN "Manu"
+F 5 "742792096" V 3400 3900 50  0001 C CNN "PartNo"
+	1    3400 3900
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2250 3900 2350 3900
+Wire Wire Line
+	2350 4250 2350 3900
+Connection ~ 2350 3900
+Wire Wire Line
+	2350 3900 2450 3900
+Wire Wire Line
+	2350 4550 2350 4900
+Wire Wire Line
+	2750 4200 2750 4900
+Wire Wire Line
+	3650 4550 3650 4900
+Wire Wire Line
+	3050 3900 3150 3900
+Wire Wire Line
+	3150 4250 3150 3900
+Connection ~ 3150 3900
+Wire Wire Line
+	3150 3900 3250 3900
+Wire Wire Line
+	3550 3900 3650 3900
+Wire Wire Line
+	3650 3900 3650 4250
+Wire Wire Line
+	4750 4000 4750 3900
+Wire Wire Line
+	4750 3900 5350 3900
+Wire Wire Line
+	5350 3900 5350 4300
+Wire Wire Line
+	5350 4300 5250 4300
+Wire Wire Line
+	5250 4600 5350 4600
+Wire Wire Line
+	5350 4600 5350 4500
+Wire Wire Line
+	5250 4500 5350 4500
+Wire Wire Line
+	4250 4300 4150 4300
+Wire Wire Line
+	4250 4500 4150 4500
+Wire Wire Line
+	4750 3900 3650 3900
+Connection ~ 4750 3900
+Connection ~ 3650 3900
+$Comp
+L mds-misc:AMS5915 U606
+U 1 1 5CBBEFB0
+P 9500 2300
+F 0 "U606" H 9550 2800 50  0000 L CNN
+F 1 "AMS5915" H 9550 2700 50  0000 L CNN
+F 2 "modusoft:AMS5915" H 9450 2800 50  0001 C CNN
+F 3 "https://www.amsys.de/downloads/data/ams5915-AMSYS-datasheet.pdf" H 9550 2000 50  0001 C CNN
+	1    9500 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Regulator_Linear:MCP1700-3302E_SOT23 U605
+U 1 1 5CBC080E
+P 7500 1800
+F 0 "U605" H 7500 2042 50  0000 C CNN
+F 1 "MCP1700-3302E_SOT23" H 7500 1951 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7500 2025 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001826C.pdf" H 7500 1800 50  0001 C CNN
+	1    7500 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C607
+U 1 1 5CBC0814
+P 7100 2300
+F 0 "C607" H 7215 2346 50  0000 L CNN
+F 1 "1u" H 7215 2255 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 7138 2150 50  0001 C CNN
+F 3 "~" H 7100 2300 50  0001 C CNN
+	1    7100 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C608
+U 1 1 5CBC081A
+P 7900 2300
+F 0 "C608" H 8015 2346 50  0000 L CNN
+F 1 "1u" H 8015 2255 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 7938 2150 50  0001 C CNN
+F 3 "~" H 7900 2300 50  0001 C CNN
+	1    7900 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C609
+U 1 1 5CBC0820
+P 8400 2300
+F 0 "C609" H 8515 2346 50  0000 L CNN
+F 1 "100n" H 8515 2255 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 8438 2150 50  0001 C CNN
+F 3 "~" H 8400 2300 50  0001 C CNN
+	1    8400 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L_Core_Ferrite L603
+U 1 1 5CBC0828
+P 8150 1800
+F 0 "L603" V 8250 1800 50  0000 C CNN
+F 1 "1k@100MHz" V 8100 1800 50  0000 C CNN
+F 2 "Inductor_SMD:L_0805_2012Metric" H 8150 1800 50  0001 C CNN
+F 3 "~" H 8150 1800 50  0001 C CNN
+F 4 "Würth" V 8150 1800 50  0001 C CNN "Manu"
+F 5 "742792096" V 8150 1800 50  0001 C CNN "PartNo"
+	1    8150 1800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	7000 1800 7100 1800
+Wire Wire Line
+	7100 2150 7100 1800
+Connection ~ 7100 1800
+Wire Wire Line
+	7100 1800 7200 1800
+Wire Wire Line
+	7100 2450 7100 2800
+Wire Wire Line
+	7500 2100 7500 2800
+Wire Wire Line
+	7900 2800 7900 2450
+Wire Wire Line
+	8400 2450 8400 2800
+Wire Wire Line
+	7800 1800 7900 1800
+Wire Wire Line
+	7900 2150 7900 1800
+Connection ~ 7900 1800
+Wire Wire Line
+	7900 1800 8000 1800
+Wire Wire Line
+	8300 1800 8400 1800
+Wire Wire Line
+	8400 1800 8400 2150
+Wire Wire Line
+	9500 1800 8400 1800
+Connection ~ 8400 1800
+Wire Wire Line
+	9500 1800 9500 1900
+Wire Wire Line
+	9500 2700 9500 2800
+Wire Wire Line
+	8900 2200 9000 2200
+Wire Wire Line
+	8900 2400 9000 2400
+Text HLabel 2250 1800 0    50   Input ~ 0
++5V
+Text HLabel 2250 3900 0    50   Input ~ 0
++5V
+Text HLabel 7000 1800 0    50   Input ~ 0
++5V
+Text HLabel 4150 4300 0    50   BiDi ~ 0
+SDA
+Text HLabel 4150 2200 0    50   BiDi ~ 0
+SDA
+Text HLabel 8900 2200 0    50   BiDi ~ 0
+SDA
+Text HLabel 4150 4500 0    50   Input ~ 0
+SCL
+Text HLabel 4150 2400 0    50   Input ~ 0
+SCL
+Text HLabel 8900 2400 0    50   Input ~ 0
+SCL
+Text HLabel 2250 2800 0    50   UnSpc ~ 0
+GND
+Text HLabel 2250 4900 0    50   UnSpc ~ 0
+GND
+Text HLabel 7000 2800 0    50   UnSpc ~ 0
+GND
+Wire Wire Line
+	4750 4800 4750 4900
+Wire Wire Line
+	4750 4900 3650 4900
+Wire Wire Line
+	3650 4900 3150 4900
+Wire Wire Line
+	3150 4550 3150 4900
+Connection ~ 3650 4900
+Wire Wire Line
+	3150 4900 2750 4900
+Connection ~ 3150 4900
+Wire Wire Line
+	2750 4900 2350 4900
+Connection ~ 2750 4900
+Wire Wire Line
+	2350 4900 2250 4900
+Connection ~ 2350 4900
+Wire Wire Line
+	4750 2800 3650 2800
+Wire Wire Line
+	3650 2800 3150 2800
+Connection ~ 3650 2800
+Wire Wire Line
+	3150 2800 2750 2800
+Connection ~ 3150 2800
+Wire Wire Line
+	2750 2800 2350 2800
+Connection ~ 2750 2800
+Wire Wire Line
+	2350 2800 2250 2800
+Connection ~ 2350 2800
+Wire Wire Line
+	7000 2800 7100 2800
+Wire Wire Line
+	7100 2800 7500 2800
+Connection ~ 7100 2800
+Wire Wire Line
+	7500 2800 7900 2800
+Connection ~ 7500 2800
+Wire Wire Line
+	7900 2800 8400 2800
+Connection ~ 7900 2800
+Wire Wire Line
+	8400 2800 9500 2800
+Connection ~ 8400 2800
+Text Notes 4400 5050 0    50   ~ 0
+I2C Address: 0x77
+Text Notes 4400 2950 0    50   ~ 0
+I2C Address: 0x76
+Text Notes 9200 2950 0    50   ~ 0
+I2C Address: 0x28
+Text Notes 9200 3050 0    50   ~ 0
+Indicated Airspeed
+Text Notes 4400 3050 0    50   ~ 0
+Static Pressure
+Text Notes 4400 5150 0    50   ~ 0
+TEK Pressure
+Wire Wire Line
+	4750 2800 5350 2800
+Wire Wire Line
+	5350 2800 5350 2500
+Connection ~ 4750 2800
+Connection ~ 5350 2500
+Wire Wire Line
+	5350 4300 5350 4500
+Connection ~ 5350 4300
+Connection ~ 5350 4500
+NoConn ~ 4250 2300
+NoConn ~ 4250 4400
+$Comp
+L power:PWR_FLAG #FLG0602
+U 1 1 5CC8B049
+P 3650 3850
+F 0 "#FLG0602" H 3650 3925 50  0001 C CNN
+F 1 "PWR_FLAG" H 3650 4024 50  0000 C CNN
+F 2 "" H 3650 3850 50  0001 C CNN
+F 3 "~" H 3650 3850 50  0001 C CNN
+	1    3650 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG0601
+U 1 1 5CC8B07F
+P 3650 1750
+F 0 "#FLG0601" H 3650 1825 50  0001 C CNN
+F 1 "PWR_FLAG" H 3650 1924 50  0000 C CNN
+F 2 "" H 3650 1750 50  0001 C CNN
+F 3 "~" H 3650 1750 50  0001 C CNN
+	1    3650 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG0603
+U 1 1 5CC8B186
+P 8400 1750
+F 0 "#FLG0603" H 8400 1825 50  0001 C CNN
+F 1 "PWR_FLAG" H 8400 1924 50  0000 C CNN
+F 2 "" H 8400 1750 50  0001 C CNN
+F 3 "~" H 8400 1750 50  0001 C CNN
+	1    8400 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8400 1750 8400 1800
+Wire Wire Line
+	3650 1750 3650 1800
+Wire Wire Line
+	3650 3850 3650 3900
+$Comp
+L Mechanical:MountingHole H601
+U 1 1 5CC525B7
+P 7600 4050
+F 0 "H601" H 7700 4096 50  0000 L CNN
+F 1 "M3" H 7700 4005 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 7600 4050 50  0001 C CNN
+F 3 "~" H 7600 4050 50  0001 C CNN
+	1    7600 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H602
+U 1 1 5CC52667
+P 7600 4250
+F 0 "H602" H 7700 4296 50  0000 L CNN
+F 1 "M3" H 7700 4205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 7600 4250 50  0001 C CNN
+F 3 "~" H 7600 4250 50  0001 C CNN
+	1    7600 4250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H603
+U 1 1 5CC526AB
+P 7600 4450
+F 0 "H603" H 7700 4496 50  0000 L CNN
+F 1 "M3" H 7700 4405 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 7600 4450 50  0001 C CNN
+F 3 "~" H 7600 4450 50  0001 C CNN
+	1    7600 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H604
+U 1 1 5CC526ED
+P 7600 4650
+F 0 "H604" H 7700 4696 50  0000 L CNN
+F 1 "M3" H 7700 4605 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 7600 4650 50  0001 C CNN
+F 3 "~" H 7600 4650 50  0001 C CNN
+	1    7600 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H605
+U 1 1 5CC529D3
+P 8500 4050
+F 0 "H605" H 8600 4096 50  0000 L CNN
+F 1 "M3" H 8600 4005 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 8500 4050 50  0001 C CNN
+F 3 "~" H 8500 4050 50  0001 C CNN
+	1    8500 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H606
+U 1 1 5CC529D9
+P 8500 4250
+F 0 "H606" H 8600 4296 50  0000 L CNN
+F 1 "M3" H 8600 4205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 8500 4250 50  0001 C CNN
+F 3 "~" H 8500 4250 50  0001 C CNN
+	1    8500 4250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H607
+U 1 1 5CC529DF
+P 8500 4450
+F 0 "H607" H 8600 4496 50  0000 L CNN
+F 1 "M3" H 8600 4405 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 8500 4450 50  0001 C CNN
+F 3 "~" H 8500 4450 50  0001 C CNN
+	1    8500 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H608
+U 1 1 5CC529E5
+P 8500 4650
+F 0 "H608" H 8600 4696 50  0000 L CNN
+F 1 "M3" H 8600 4605 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 8500 4650 50  0001 C CNN
+F 3 "~" H 8500 4650 50  0001 C CNN
+	1    8500 4650
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
