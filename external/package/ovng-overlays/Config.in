@@ -1,0 +1,7 @@
+config BR2_PACKAGE_OVNG_OVERLAYS
+	bool "ovng-overlays"
+	depends on BR2_arm # only relevant for TI am335x
+	select BR2_PACKAGE_HOST_DTC
+	help
+	  OpenVarioNG device tree overlays
+

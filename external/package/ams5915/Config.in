@@ -1,0 +1,13 @@
+config BR2_PACKAGE_AMS5915
+	bool "ams5915"
+	depends on BR2_LINUX_KERNEL
+	help
+	  IIO driver for AMS4915 preassure Amplified pressure sensor
+	  with digital output (I2C).
+
+	  https://www.amsys.de/downloads/data/ams5915-AMSYS-datasheet.pdf
+
+comment "ams5915 needs a Linux kernel to be built"
+	depends on !BR2_LINUX_KERNEL
+
+

@@ -1,0 +1,252 @@
+diff -Naur xcsoar-v6.8.11.orig/build/darwin.mk xcsoar-v6.8.11/build/darwin.mk
+--- xcsoar-v6.8.11.orig/build/darwin.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/darwin.mk	2019-04-26 08:47:50.195680481 +0200
+@@ -2,7 +2,7 @@
+ 
+ TARGET_LDLIBS += -framework Foundation
+ 
+-TARGET_CPPFLAGS += -isystem $(DARWIN_LIBS)/include
++TARGET_CPPFLAGS += -I$(DARWIN_LIBS)/include
+ TARGET_CXXFLAGS += -ObjC++ -fobjc-arc
+ 
+ TARGET_ARCH += -isysroot $(DARWIN_SDK)
+diff -Naur xcsoar-v6.8.11.orig/build/egl.mk xcsoar-v6.8.11/build/egl.mk
+--- xcsoar-v6.8.11.orig/build/egl.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/egl.mk	2019-04-26 08:47:56.375680287 +0200
+@@ -46,8 +46,8 @@
+ ifeq ($(TARGET_IS_PI),y)
+ # Raspberry Pi detected
+ EGL_CPPFLAGS += -DUSE_VIDEOCORE
+-EGL_CPPFLAGS += -isystem $(PI)/opt/vc/include -isystem $(PI)/opt/vc/include/interface/vcos/pthreads
+-EGL_CPPFLAGS += -isystem $(PI)/opt/vc/include/interface/vmcs_host/linux
++EGL_CPPFLAGS += -I$(PI)/opt/vc/include -I$(PI)/opt/vc/include/interface/vcos/pthreads
++EGL_CPPFLAGS += -I$(PI)/opt/vc/include/interface/vmcs_host/linux
+ EGL_LDLIBS += -L$(PI)/opt/vc/lib -lvchostif -lvchiq_arm -lvcos -lbcm_host
+ USE_CONSOLE = y
+ else ifeq ($(TARGET_HAS_MALI),y)
+@@ -56,8 +56,6 @@
+ else ifeq ($(ENABLE_MESA_KMS),y)
+ $(eval $(call pkg-config-library,DRM,libdrm))
+ $(eval $(call pkg-config-library,GBM,gbm))
+-DRM_CPPFLAGS := $(patsubst -I%,-isystem %,$(DRM_CPPFLAGS))
+-GBM_CPPFLAGS := $(patsubst -I%,-isystem %,$(GBM_CPPFLAGS))
+ EGL_CPPFLAGS += -DMESA_KMS $(DRM_CPPFLAGS) $(GBM_CPPFLAGS)
+ EGL_LDLIBS += $(DRM_LDLIBS) $(GBM_LDLIBS)
+ USE_CONSOLE = y
+diff -Naur xcsoar-v6.8.11.orig/build/freetype.mk xcsoar-v6.8.11/build/freetype.mk
+--- xcsoar-v6.8.11.orig/build/freetype.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/freetype.mk	2019-04-26 08:39:12.899696706 +0200
+@@ -3,7 +3,6 @@
+ ifeq ($(FREETYPE),y)
+ 
+ $(eval $(call pkg-config-library,FREETYPE,freetype2))
+-FREETYPE_CPPFLAGS := $(patsubst -I%,-isystem %,$(FREETYPE_CPPFLAGS))
+ 
+ FREETYPE_CPPFLAGS += -DUSE_FREETYPE
+ 
+diff -Naur xcsoar-v6.8.11.orig/build/libboost.mk xcsoar-v6.8.11/build/libboost.mk
+--- xcsoar-v6.8.11.orig/build/libboost.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/libboost.mk	2019-04-26 08:48:11.075679826 +0200
+@@ -4,17 +4,17 @@
+ 	-DBOOST_NO_IOSFWD \
+ 	-DBOOST_NO_STRINGSTREAM \
+ 	-DBOOST_NO_WSTREAMBUF \
+-	-isystem $(BOOST)/assert/include \
+-	-isystem $(BOOST)/core/include \
+-	-isystem $(BOOST)/detail/include \
+-	-isystem $(BOOST)/functional/include \
+-	-isystem $(BOOST)/function_types/include \
+-	-isystem $(BOOST)/integer/include \
+-	-isystem $(BOOST)/intrusive/include \
+-	-isystem $(BOOST)/move/include \
+-	-isystem $(BOOST)/mpl/include \
+-	-isystem $(BOOST)/preprocessor/include \
+-	-isystem $(BOOST)/static_assert/include \
+-	-isystem $(BOOST)/tti/include \
+-	-isystem $(BOOST)/type_traits/include \
+-	-isystem $(BOOST)/config/include
++	-I$(BOOST)/assert/include \
++	-I$(BOOST)/core/include \
++	-I$(BOOST)/detail/include \
++	-I$(BOOST)/functional/include \
++	-I$(BOOST)/function_types/include \
++	-I$(BOOST)/integer/include \
++	-I$(BOOST)/intrusive/include \
++	-I$(BOOST)/move/include \
++	-I$(BOOST)/mpl/include \
++	-I$(BOOST)/preprocessor/include \
++	-I$(BOOST)/static_assert/include \
++	-I$(BOOST)/tti/include \
++	-I$(BOOST)/type_traits/include \
++	-I$(BOOST)/config/include
+diff -Naur xcsoar-v6.8.11.orig/build/libcxx.mk xcsoar-v6.8.11/build/libcxx.mk
+--- xcsoar-v6.8.11.orig/build/libcxx.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/libcxx.mk	2019-04-26 08:48:18.391679597 +0200
+@@ -5,8 +5,8 @@
+ 
+ ifeq ($(TARGET),ANDROID)
+ LIBCXX_CXXFLAGS = -nostdinc++ \
+-	-isystem $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/include \
+-	-isystem $(ANDROID_NDK)/sources/android/support/include \
++	-I$(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/include \
++	-I$(ANDROID_NDK)/sources/android/support/include \
+ 	-DLIBCXX
+   LIBCXX_LDADD = $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libs/$(ANDROID_ABI3)/libc++_static.a \
+ 	$(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libs/$(ANDROID_ABI3)/libc++abi.a
+@@ -23,7 +23,7 @@
+ else
+ 
+ LIBCXX_CXXFLAGS_INTERNAL = -Wno-char-subscripts -Wno-sign-compare
+-LIBCXX_CPPFLAGS = -nostdinc++ -isystem $(LIBCXX)/include -DLIBCXX
++LIBCXX_CPPFLAGS = -nostdinc++ -I$(LIBCXX)/include -DLIBCXX
+ LIBCXX_SOURCES = \
+ 	$(SRC)/LibCXX.cpp \
+ 	$(LIBCXX)/src/algorithm.cpp \
+diff -Naur xcsoar-v6.8.11.orig/build/libevent.mk xcsoar-v6.8.11/build/libevent.mk
+--- xcsoar-v6.8.11.orig/build/libevent.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/libevent.mk	2019-04-26 08:40:16.323694716 +0200
+@@ -85,7 +85,6 @@
+ 
+ ifeq ($(USE_LIBINPUT),y)
+ $(eval $(call pkg-config-library,LIBINPUT,libinput))
+-LIBINPUT_CPPFLAGS := $(patsubst -I%,-isystem %,$(LIBINPUT_CPPFLAGS))
+ EVENT_CPPFLAGS_INTERNAL += $(UDEV_CPPFLAGS)
+ ifeq ($(LIBINPUT_MODVERSION),0.6.0)
+ EVENT_CPPFLAGS_INTERNAL += -DLIBINPUT_LEGACY_API
+diff -Naur xcsoar-v6.8.11.orig/build/libpng.mk xcsoar-v6.8.11/build/libpng.mk
+--- xcsoar-v6.8.11.orig/build/libpng.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/libpng.mk	2019-04-26 08:40:24.975694445 +0200
+@@ -3,7 +3,6 @@
+ ifeq ($(LIBPNG),y)
+ 
+ $(eval $(call pkg-config-library,LIBPNG,libpng))
+-LIBPNG_CPPFLAGS := $(patsubst -I%,-isystem %,$(LIBPNG_CPPFLAGS))
+ 
+ LIBPNG_LDADD += $(ZLIB_LDADD)
+ LIBPNG_LDLIBS += $(ZLIB_LDLIBS)
+diff -Naur xcsoar-v6.8.11.orig/build/libstdcxx.mk xcsoar-v6.8.11/build/libstdcxx.mk
+--- xcsoar-v6.8.11.orig/build/libstdcxx.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/libstdcxx.mk	2019-04-26 08:48:35.155679071 +0200
+@@ -1,8 +1,8 @@
+ # This file provides "make" rules for the C++ standard library.
+ 
+ ifeq ($(TARGET),ANDROID)
+-  LIBSTDCXX_CPPFLAGS = -isystem $(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/$(ANDROID_GCC_VERSION)/include \
+-	-isystem $(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/$(ANDROID_GCC_VERSION)/libs/$(ANDROID_ABI3)/include
++  LIBSTDCXX_CPPFLAGS = -I$(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/$(ANDROID_GCC_VERSION)/include \
++	-I$(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/$(ANDROID_GCC_VERSION)/libs/$(ANDROID_ABI3)/include
+   LIBSTDCXX_LDADD = $(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/$(ANDROID_GCC_VERSION)/libs/$(ANDROID_ABI3)/libgnustl_static.a
+ endif
+ 
+diff -Naur xcsoar-v6.8.11.orig/build/llvm.mk xcsoar-v6.8.11/build/llvm.mk
+--- xcsoar-v6.8.11.orig/build/llvm.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/llvm.mk	2019-04-26 08:48:41.887678860 +0200
+@@ -38,8 +38,8 @@
+ endif
+ 
+ ifeq ($(HOST_IS_PI)$(TARGET_IS_PI),ny)
+-  TARGET_CPPFLAGS += -isystem /opt/pi/root/usr/include/c++/4.6
+-  TARGET_CPPFLAGS += -isystem /opt/pi/root/usr/include/c++/4.6/arm-linux-gnueabihf
++  TARGET_CPPFLAGS += -I/opt/pi/root/usr/include/c++/4.6
++  TARGET_CPPFLAGS += -I/opt/pi/root/usr/include/c++/4.6/arm-linux-gnueabihf
+   TARGET_LDFLAGS += -L$(PI)/usr/lib/gcc/arm-linux-gnueabihf/4.6
+ endif
+ 
+@@ -47,8 +47,8 @@
+   # cross-crompiling for Cubieboard
+   TARGET_LLVM_FLAGS = -march=arm -mcpu=cortex-a8 -mattr=+neon -float-abi=hard \
+ 	-enable-no-infs-fp-math -enable-no-nans-fp-math -enable-unsafe-fp-math
+-  TARGET_CPPFLAGS += -isystem $(CUBIE)/usr/include/c++/4.7
+-  TARGET_CPPFLAGS += -isystem $(CUBIE)/usr/include/c++/4.7/arm-linux-gnueabihf
++  TARGET_CPPFLAGS += -I$(CUBIE)/usr/include/c++/4.7
++  TARGET_CPPFLAGS += -I$(CUBIE)/usr/include/c++/4.7/arm-linux-gnueabihf
+   TARGET_LDFLAGS += -L$(CUBIE)/usr/lib/gcc/arm-linux-gnueabihf/4.7
+ endif
+ 
+diff -Naur xcsoar-v6.8.11.orig/build/sdl.mk xcsoar-v6.8.11/build/sdl.mk
+--- xcsoar-v6.8.11.orig/build/sdl.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/sdl.mk	2019-04-26 08:46:33.623682883 +0200
+@@ -33,7 +33,6 @@
+ 
+ ifeq ($(USE_SDL2),y)
+ $(eval $(call pkg-config-library,SDL,sdl2))
+-SDL_CPPFLAGS := $(patsubst -I%,-isystem %,$(SDL_CPPFLAGS))
+ else
+ $(eval $(call pkg-config-library,SDL,sdl))
+ endif
+diff -Naur xcsoar-v6.8.11.orig/build/targets.mk xcsoar-v6.8.11/build/targets.mk
+--- xcsoar-v6.8.11.orig/build/targets.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/targets.mk	2019-04-26 08:49:05.295678126 +0200
+@@ -659,14 +659,14 @@
+ 
+ ifeq ($(TARGET_IS_PI),y)
+   ifneq ($(PI),)
+-    TARGET_CPPFLAGS += --sysroot=$(PI) -isystem $(PI)/usr/include/arm-linux-gnueabihf -isystem $(PI)/usr/include
++    TARGET_CPPFLAGS += --sysroot=$(PI) -I$(PI)/usr/include/arm-linux-gnueabihf -I$(PI)/usr/include
+   endif
+ endif
+ 
+ ifeq ($(HOST_IS_ARM)$(TARGET_HAS_MALI),ny)
+   # cross-crompiling for Cubieboard
+-  TARGET_CPPFLAGS += --sysroot=$(CUBIE) -isystem $(CUBIE)/usr/include/arm-linux-gnueabihf
+-  TARGET_CPPFLAGS += -isystem $(CUBIE)/usr/local/stow/sunxi-mali/include
++  TARGET_CPPFLAGS += --sysroot=$(CUBIE) -I$(CUBIE)/usr/include/arm-linux-gnueabihf
++  TARGET_CPPFLAGS += -I$(CUBIE)/usr/local/stow/sunxi-mali/include
+ endif
+ 
+ ifeq ($(TARGET_IS_KOBO),y)
+@@ -675,7 +675,7 @@
+ 
+ ifeq ($(TARGET),ANDROID)
+   TARGET_CPPFLAGS += --sysroot=$(ANDROID_SYSROOT)
+-  TARGET_CPPFLAGS += -isystem $(ANDROID_SYSROOT)/usr/include/$(ANDROID_ABI4)
++  TARGET_CPPFLAGS += -I$(ANDROID_SYSROOT)/usr/include/$(ANDROID_ABI4)
+   TARGET_CPPFLAGS += -DANDROID
+   TARGET_CPPFLAGS += -D__ANDROID_API__=13
+   CXXFLAGS += -D__STDC_VERSION__=199901L
+diff -Naur xcsoar-v6.8.11.orig/build/thirdparty.mk xcsoar-v6.8.11/build/thirdparty.mk
+--- xcsoar-v6.8.11.orig/build/thirdparty.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/thirdparty.mk	2019-04-26 08:47:24.331681292 +0200
+@@ -16,7 +16,7 @@
+ kobo-libs:
+ 	./kobo/build.py $(TARGET_OUTPUT_DIR) $(HOST_TRIPLET) "$(TARGET_ARCH)" "$(TARGET_CPPFLAGS)" "$(filter-out $(THIRDPARTY_LDFLAGS_FILTER_OUT),$(TARGET_LDFLAGS))" $(CC) $(CXX) $(AR) $(ARFLAGS) $(RANLIB) $(STRIP)
+ 
+-TARGET_CPPFLAGS += -isystem $(THIRDPARTY_LIBS_ROOT)/include
++TARGET_CPPFLAGS += -I$(THIRDPARTY_LIBS_ROOT)/include
+ TARGET_LDFLAGS += -L$(THIRDPARTY_LIBS_ROOT)/lib
+ 
+ endif
+diff -Naur xcsoar-v6.8.11.orig/build/udev.mk xcsoar-v6.8.11/build/udev.mk
+--- xcsoar-v6.8.11.orig/build/udev.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/udev.mk	2019-04-26 08:49:25.867677480 +0200
+@@ -4,6 +4,5 @@
+ ifeq ($(ENABLE_UDEV),y)
+ 
+ $(eval $(call pkg-config-library,UDEV,libudev))
+-UDEV_CPPFLAGS := $(patsubst -I%,-isystem %,$(UDEV_CPPFLAGS))
+ 
+ endif
+diff -Naur xcsoar-v6.8.11.orig/build/zlib.mk xcsoar-v6.8.11/build/zlib.mk
+--- xcsoar-v6.8.11.orig/build/zlib.mk	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/build/zlib.mk	2019-04-26 08:49:34.859677198 +0200
+@@ -5,7 +5,7 @@
+ ZLIB_LDADD =
+ ZLIB_LDLIBS = -L$(ZLIB_PREFIX)/lib -lz
+ 
+-ZLIB_CPPFLAGS = -isystem$(ZLIB_PREFIX)/include
++ZLIB_CPPFLAGS = -I$(ZLIB_PREFIX)/include
+ 
+ else ifeq ($(TARGET),UNIX)
+ 
+diff -Naur xcsoar-v6.8.11.orig/kobo/build.py xcsoar-v6.8.11/kobo/build.py
+--- xcsoar-v6.8.11.orig/kobo/build.py	2018-08-18 16:36:49.000000000 +0200
++++ xcsoar-v6.8.11/kobo/build.py	2019-04-26 08:49:58.583676454 +0200
+@@ -48,7 +48,7 @@
+         common_flags = '-Os -g -ffunction-sections -fdata-sections -fvisibility=hidden ' + arch_cflags
+         self.cflags = common_flags
+         self.cxxflags = common_flags
+-        self.cppflags = '-isystem ' + os.path.join(install_prefix, 'include') + ' -DNDEBUG ' + cppflags
++        self.cppflags = '-I' + os.path.join(install_prefix, 'include') + ' -DNDEBUG ' + cppflags
+         self.ldflags = '-L' + os.path.join(install_prefix, 'lib') + ' ' + arch_ldflags
+         self.libs = ''
+ 

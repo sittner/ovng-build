@@ -1,0 +1,1 @@
+MODULES="ms5611_i2c ams5915 icm20948 w1_therm"

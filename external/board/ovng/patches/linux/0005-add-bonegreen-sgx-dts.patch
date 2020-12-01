@@ -1,0 +1,28 @@
+diff -Naur linux-4.19.31-ti-r18.orig/arch/arm/boot/dts/am335x-bonegreen.dts linux-4.19.31-ti-r18/arch/arm/boot/dts/am335x-bonegreen.dts
+--- linux-4.19.31-ti-r18.orig/arch/arm/boot/dts/am335x-bonegreen.dts	2019-04-10 23:46:55.000000000 +0200
++++ linux-4.19.31-ti-r18/arch/arm/boot/dts/am335x-bonegreen.dts	2019-06-28 15:38:32.471649028 +0200
+@@ -12,6 +12,10 @@
+ #include "am335x-bonegreen-common.dtsi"
+ /* #include "am335x-bone-jtag.dtsi" */
+ 
++&sgx {
++	status = "okay";
++};
++
+ / {
+ 	model = "TI AM335x BeagleBone Green";
+ 	compatible = "ti,am335x-bone-green", "ti,am335x-bone-black", "ti,am335x-bone", "ti,am33xx";
+diff -Naur linux-4.19.31-ti-r18.orig/arch/arm/boot/dts/am335x-bonegreen-wireless.dts linux-4.19.31-ti-r18/arch/arm/boot/dts/am335x-bonegreen-wireless.dts
+--- linux-4.19.31-ti-r18.orig/arch/arm/boot/dts/am335x-bonegreen-wireless.dts	2019-04-10 23:46:55.000000000 +0200
++++ linux-4.19.31-ti-r18/arch/arm/boot/dts/am335x-bonegreen-wireless.dts	2019-06-28 15:38:30.159613588 +0200
+@@ -13,6 +13,10 @@
+ #include <dt-bindings/interrupt-controller/irq.h>
+ /* #include "am335x-bone-jtag.dtsi" */
+ 
++&sgx {
++	status = "okay";
++};
++
+ / {
+ 	model = "TI AM335x BeagleBone Green Wireless";
+ 	compatible = "ti,am335x-bone-green-wireless", "ti,am335x-bone-green", "ti,am335x-bone-black", "ti,am335x-bone", "ti,am33xx";

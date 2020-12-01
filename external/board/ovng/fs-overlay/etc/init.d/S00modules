@@ -1,0 +1,43 @@
+#!/bin/sh
+
+DAEMON="modules"
+
+MODULES=""
+
+# shellcheck source=/dev/null
+[ -r "/etc/default/$DAEMON" ] && . "/etc/default/$DAEMON"
+
+start() {
+	echo -n "Loading modules: "
+	for M in $MODULES; do
+		echo -n "$M ";
+		modprobe $M
+	done
+	echo "."
+}
+
+stop() {
+	echo -n "Unloading modules: "
+	for M in $MODULES; do
+		echo -n "$M ";
+		rmmod $M
+	done
+	echo "."
+}
+
+restart() {
+	stop
+	sleep 1
+	start
+}
+
+case "$1" in
+        start|stop|restart)
+		"$1";;
+	reload)
+		# Restart, since there is no true "reload" feature.
+		restart;;
+        *)
+                echo "Usage: $0 {start|stop|restart|reload}"
+                exit 1
+esac

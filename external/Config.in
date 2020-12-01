@@ -1,0 +1,1 @@
+source "$BR2_EXTERNAL_OVNG_PATH/package/Config.in"

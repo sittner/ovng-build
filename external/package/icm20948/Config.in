@@ -1,0 +1,12 @@
+config BR2_PACKAGE_ICM20948
+	bool "icm20948"
+	depends on BR2_LINUX_KERNEL
+	help
+	  Simple IIO driver for ICM20948 9-Axis MEMS MotionTracking Device (I2C mode only).
+
+	  http://www.invensense.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf
+
+comment "icm20948 needs a Linux kernel to be built"
+	depends on !BR2_LINUX_KERNEL
+
+
