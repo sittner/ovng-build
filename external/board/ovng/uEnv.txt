@@ -1,0 +1,19 @@
+console=ttyS0,115200n8
+devtype=mmc
+bootdir=/boot
+bootfile=zImage
+fdtfile=am335x-bonegreen.dtb
+mmcdev=0
+mmcpart=2
+mmcrootfstype="ext4 rootwait"
+dtodir=overlays
+dtolist=BB-OVNG-00A0 BB-OVNG-UART1-00A0 BB-OVNG-LCD7-00A0
+loadaddr=0x82000000
+fdtaddr=0x88000000
+fdtsize=0x20000
+set_bootpart=setenv bootpart ${mmcdev}:${mmcpart}
+set_bootargs=setenv bootargs console=${console} ${optargs} root=/dev/mmcblk${mmcdev}p${mmcpart} rw rootfstype=${mmcrootfstype}
+loadfdt=load ${devtype} ${bootpart} ${fdtaddr} ${bootdir}/${fdtfile}
+loaddto=fdt addr ${fdtaddr}; fdt resize ${fdtsize}; for overlay in ${dtolist}; do load ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${dtodir}/${overlay}.dtbo; fdt apply ${loadaddr}; done
+loadimage=load ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${bootfile}
+bootcmd=run set_bootpart; run loadfdt; run loaddto; run loadimage; run set_bootargs; bootz ${loadaddr} - ${fdtaddr}

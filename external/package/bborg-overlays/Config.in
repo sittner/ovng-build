@@ -1,8 +1,0 @@
-config BR2_PACKAGE_BBORG_OVERLAYS
-	bool "bborg-overlays"
-	depends on BR2_arm # only relevant for TI am335x
-	select BR2_PACKAGE_HOST_DTC
-	help
-	  beaglebone.org device tree overlays
-
-	  https://github.com/beagleboard/bb.org-overlays

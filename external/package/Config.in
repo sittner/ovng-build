@@ -1,5 +1,4 @@
 menu "OpenVario"
-	source "$BR2_EXTERNAL_OVNG_PATH/package/bborg-overlays/Config.in"
 	source "$BR2_EXTERNAL_OVNG_PATH/package/ovng-overlays/Config.in"
 	source "$BR2_EXTERNAL_OVNG_PATH/package/ovngd/Config.in"
 	source "$BR2_EXTERNAL_OVNG_PATH/package/xcsoar/Config.in"
