@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-OVNG_OVERLAYS_VERSION = 838bff34ba20151d5f7ed764a543c472e55c46bc
+OVNG_OVERLAYS_VERSION = 846ea07bcf2fec9ec8f6c9340baceb5a1f706961
 OVNG_OVERLAYS_SITE = https://github.com/sittner/ovng-overlays.git
 OVNG_OVERLAYS_SITE_METHOD = git
 OVNG_OVERLAYS_LICENSE = GPL-2.0

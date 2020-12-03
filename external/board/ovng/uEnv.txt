@@ -2,18 +2,18 @@ console=ttyS0,115200n8
 devtype=mmc
 bootdir=/boot
 bootfile=zImage
-fdtfile=am335x-bonegreen.dtb
 mmcdev=0
 mmcpart=2
 mmcrootfstype="ext4 rootwait"
 dtodir=overlays
-dtolist=BB-OVNG-00A0 BB-OVNG-UART1-00A0 BB-OVNG-LCD7-00A0
+dtolist=bone-i2c2 ovng-baseboard ovng-uart1 ovng-lcd7-seeed
 loadaddr=0x82000000
 fdtaddr=0x88000000
 fdtsize=0x20000
+findfdt=if test $board_name = A335BNLT; then setenv fdtfile am335x-boneblack.dtb; fi; if test $board_name = BBG1; then setenv fdtfile am335x-bonegreen.dtb; fi; if test $fdtfile = undefined; then echo WARNING: Could not determine device tree to use; fi;
 set_bootpart=setenv bootpart ${mmcdev}:${mmcpart}
 set_bootargs=setenv bootargs console=${console} ${optargs} root=/dev/mmcblk${mmcdev}p${mmcpart} rw rootfstype=${mmcrootfstype}
-loadfdt=load ${devtype} ${bootpart} ${fdtaddr} ${bootdir}/${fdtfile}
-loaddto=fdt addr ${fdtaddr}; fdt resize ${fdtsize}; for overlay in ${dtolist}; do load ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${dtodir}/${overlay}.dtbo; fdt apply ${loadaddr}; done
-loadimage=load ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${bootfile}
-bootcmd=run set_bootpart; run loadfdt; run loaddto; run loadimage; run set_bootargs; bootz ${loadaddr} - ${fdtaddr}
+loadfdt=echo Loading device tree from ${bootdir}/${fdtfile}; load ${devtype} ${bootpart} ${fdtaddr} ${bootdir}/${fdtfile}
+loaddto=fdt addr ${fdtaddr}; fdt resize ${fdtsize}; for overlay in ${dtolist}; do if test -e ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${dtodir}/${overlay}.dtbo; then echo Loading overlay from ${bootdir}/${dtodir}/${overlay}.dtbo; load ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${dtodir}/${overlay}.dtbo; fdt apply ${loadaddr}; fi; done
+loadimage=echo Loading kernel from ${bootdir}/${bootfile}; load ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${bootfile}
+bootcmd=run set_bootpart; run findfdt; run loadfdt; run loaddto; run loadimage; run set_bootargs; bootz ${loadaddr} - ${fdtaddr}
