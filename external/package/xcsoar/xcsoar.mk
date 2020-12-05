@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-XCSOAR_VERSION = v6.8.12
-XCSOAR_SITE = https://github.com/XCSoar/XCSoar.git
+XCSOAR_VERSION = v6.8.17-ovng1
+XCSOAR_SITE = https://github.com/sittner/XCSoar.git
 XCSOAR_SITE_METHOD = git
 XCSOAR_LICENSE = GPL-2.0
 XCSOAR_LICENSE_FILES = COPYING
