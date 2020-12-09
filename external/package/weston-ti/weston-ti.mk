@@ -110,4 +110,16 @@ else
 WESTON_TI_CONF_OPTS += -Ddemo-clients=false
 endif
 
+define WESTON_TI_INSTALL_EXTRA_FILES
+	$(INSTALL) -m 0644 -D $(BR2_EXTERNAL_OVNG_PATH)/package/weston-ti/weston.ini $(TARGET_DIR)/etc/weston.ini
+	$(INSTALL) -m 0644 -D $(BR2_EXTERNAL_OVNG_PATH)/package/weston-ti/wayland_env $(TARGET_DIR)/etc/default/wayland_env
+	$(INSTALL) -m 0644 -D $(BR2_EXTERNAL_OVNG_PATH)/package/weston-ti/weston.default $(TARGET_DIR)/etc/default/weston
+endef
+
+WESTON_TI_POST_INSTALL_TARGET_HOOKS += WESTON_TI_INSTALL_EXTRA_FILES
+
+define WESTON_TI_INSTALL_INIT_SYSV
+	$(INSTALL) -D -m 755 $(BR2_EXTERNAL_OVNG_PATH)/package/weston-ti/S85weston $(TARGET_DIR)/etc/init.d/S85weston
+endef
+
 $(eval $(meson-package))

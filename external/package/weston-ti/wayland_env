@@ -1,0 +1,5 @@
+export XDG_CONFIG_HOME=/etc/
+export XDG_RUNTIME_DIR=/var/run/xdg-runtime-dir
+export WAYLAND_DISPLAY=wayland-0
+export WS_CALUDEV_FILE=/etc/udev/rules.d/ws-calibrate.rules
+
