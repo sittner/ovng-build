@@ -1,0 +1,66 @@
+comment "weston-ti needs udev and a toolchain w/ locale, threads, dynamic library, ti-sgx-um, headers >= 3.0"
+	depends on !BR2_PACKAGE_HAS_UDEV || !BR2_TOOLCHAIN_HAS_THREADS || \
+		!BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_0 || BR2_STATIC_LIBS || \
+		!BR2_ENABLE_LOCALE || !BR2_PACKAGE_TI_IMG_SGX_UM
+
+config BR2_PACKAGE_WESTON_TI
+	bool "weston-ti"
+	depends on BR2_PACKAGE_HAS_UDEV
+	depends on !BR2_STATIC_LIBS # wayland
+	depends on BR2_TOOLCHAIN_HAS_THREADS # wayland
+	depends on BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_0
+	depends on BR2_PACKAGE_TI_IMG_SGX_UM
+	select BR2_PACKAGE_WAYLAND
+	select BR2_PACKAGE_WAYLAND_PROTOCOLS
+	select BR2_PACKAGE_LIBXKBCOMMON
+	select BR2_PACKAGE_CAIRO
+	select BR2_PACKAGE_CAIRO_PNG
+	select BR2_PACKAGE_LIBPNG
+	select BR2_PACKAGE_JPEG
+	select BR2_PACKAGE_LIBINPUT
+	select BR2_PACKAGE_LIBDRM
+	# Runtime dependency
+	select BR2_PACKAGE_XKEYBOARD_CONFIG
+	help
+	  Weston is the reference implementation of a Wayland
+	  compositor, and a useful compositor in its own right.
+	  Weston has various backends that lets it run on Linux kernel
+	  modesetting and evdev input as well as under X11.
+
+	  http://wayland.freedesktop.org/
+
+if BR2_PACKAGE_WESTON
+
+config BR2_PACKAGE_WESTON_TI_XWAYLAND
+	bool "XWayland support"
+	depends on BR2_PACKAGE_XORG7
+	depends on BR2_PACKAGE_LIBEPOXY
+	select BR2_PACKAGE_CAIRO
+	select BR2_PACKAGE_LIBXCB
+	select BR2_PACKAGE_XLIB_LIBX11
+	select BR2_PACKAGE_XLIB_LIBXCURSOR
+
+comment "XWayland support needs libepoxy and X.org enabled"
+	depends on !BR2_PACKAGE_XORG7 || !BR2_PACKAGE_LIBEPOXY
+
+config BR2_PACKAGE_WESTON_TI_DEMO_CLIENTS
+	bool "demo clients"
+	depends on BR2_USE_MMU # pango
+	depends on BR2_TOOLCHAIN_HAS_SYNC_4 # pango
+	depends on BR2_INSTALL_LIBSTDCPP # pango
+	depends on BR2_TOOLCHAIN_HAS_THREADS # pango
+	depends on BR2_USE_WCHAR # pango
+	depends on BR2_PACKAGE_HAS_LIBGLES
+	depends on BR2_PACKAGE_HAS_LIBEGL_WAYLAND
+	select BR2_PACKAGE_PANGO
+	help
+	  This enables the installation of Weston's demo clients.
+
+comment "demo clients needs an OpenGL ES provider, an OpenEGL-capable Wayland backend and a toolchain w/ wchar, threads, C++"
+	depends on BR2_USE_MMU
+	depends on BR2_TOOLCHAIN_HAS_SYNC_4
+	depends on !BR2_INSTALL_LIBSTDCPP || !BR2_TOOLCHAIN_HAS_THREADS || \
+		!BR2_USE_WCHAR || !BR2_PACKAGE_HAS_LIBGLES || \
+		!BR2_PACKAGE_HAS_LIBEGL_WAYLAND
+
+endif

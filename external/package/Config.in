@@ -6,3 +6,12 @@ menu "OpenVario"
 	source "$BR2_EXTERNAL_OVNG_PATH/package/ams5915/Config.in"
 endmenu
 
+menu "Graphic libraries and applications (graphic/text)"
+	source "$BR2_EXTERNAL_OVNG_PATH/package/weston-ti/Config.in"
+endmenu
+
+menu "Hardware handling"
+	source "$BR2_EXTERNAL_OVNG_PATH/package/ti-img-sgx-km/Config.in"
+	source "$BR2_EXTERNAL_OVNG_PATH/package/ti-img-sgx-um/Config.in"
+endmenu
+

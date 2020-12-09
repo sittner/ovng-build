@@ -1,0 +1,13 @@
+diff -Naur weston-ti-8.0.0.orig/libweston/backend-drm/meson.build weston-ti-8.0.0/libweston/backend-drm/meson.build
+--- weston-ti-8.0.0.orig/libweston/backend-drm/meson.build	2020-01-24 21:05:18.368963000 +0100
++++ weston-ti-8.0.0/libweston/backend-drm/meson.build	2020-12-09 17:27:04.112738026 +0100
+@@ -46,9 +46,6 @@
+ 	if not dep_gbm.found()
+ 		error('drm-backend with GL renderer requires gbm which was not found. Or, you can use \'-Drenderer-gl=false\'.')
+ 	endif
+-	if dep_gbm.version().version_compare('>= 17.1')
+-		config_h.set('HAVE_GBM_MODIFIERS', '1')
+-	endif
+ 	if dep_gbm.version().version_compare('>= 17.2')
+ 		config_h.set('HAVE_GBM_FD_IMPORT', '1')
+ 	endif
