@@ -113,7 +113,6 @@ endif
 define WESTON_TI_INSTALL_EXTRA_FILES
 	$(INSTALL) -m 0644 -D $(BR2_EXTERNAL_OVNG_PATH)/package/weston-ti/weston.ini $(TARGET_DIR)/etc/weston.ini
 	$(INSTALL) -m 0644 -D $(BR2_EXTERNAL_OVNG_PATH)/package/weston-ti/wayland_env $(TARGET_DIR)/etc/default/wayland_env
-	$(INSTALL) -m 0644 -D $(BR2_EXTERNAL_OVNG_PATH)/package/weston-ti/weston.default $(TARGET_DIR)/etc/default/weston
 endef
 
 WESTON_TI_POST_INSTALL_TARGET_HOOKS += WESTON_TI_INSTALL_EXTRA_FILES
