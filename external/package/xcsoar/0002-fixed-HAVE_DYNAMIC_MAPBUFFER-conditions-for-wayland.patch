@@ -1,0 +1,12 @@
+diff -Naur xcsoar-v6.8.17.orig/src/Screen/OpenGL/Features.hpp xcsoar-v6.8.17/src/Screen/OpenGL/Features.hpp
+--- xcsoar-v6.8.17.orig/src/Screen/OpenGL/Features.hpp	2020-09-22 16:46:01.000000000 +0200
++++ xcsoar-v6.8.17/src/Screen/OpenGL/Features.hpp	2020-12-09 23:51:02.224250873 +0100
+@@ -51,7 +51,7 @@
+ #define HAVE_OES_MAPBUFFER
+ #endif
+ 
+-#if defined(HAVE_MALI) || defined(_WIN32) || (defined(HAVE_GLES) && (defined(MESA_KMS) || defined(USE_X11)))
++#if defined(HAVE_MALI) || defined(_WIN32) || (defined(HAVE_GLES) && (defined(MESA_KMS) || defined(USE_X11) || defined(USE_WAYLAND)))
+ #define HAVE_DYNAMIC_MAPBUFFER
+ #endif
+ 

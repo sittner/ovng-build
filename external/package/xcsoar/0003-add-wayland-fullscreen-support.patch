@@ -1,0 +1,72 @@
+diff -Naur xcsoar-v6.8.17.orig/src/CommandLine.hpp xcsoar-v6.8.17/src/CommandLine.hpp
+--- xcsoar-v6.8.17.orig/src/CommandLine.hpp	2020-09-22 16:46:01.000000000 +0200
++++ xcsoar-v6.8.17/src/CommandLine.hpp	2020-12-09 23:59:26.809251723 +0100
+@@ -33,7 +33,7 @@
+ 
+ #ifdef KOBO
+   static constexpr bool full_screen = false;
+-#elif defined(ENABLE_SDL) || defined(USE_X11)
++#elif defined(ENABLE_SDL) || defined(USE_X11) || defined(USE_WAYLAND)
+ #define HAVE_CMDLINE_FULLSCREEN
+   extern bool full_screen;
+ #else
+diff -Naur xcsoar-v6.8.17.orig/src/Screen/TopWindow.hpp xcsoar-v6.8.17/src/Screen/TopWindow.hpp
+--- xcsoar-v6.8.17.orig/src/Screen/TopWindow.hpp	2020-09-22 16:46:01.000000000 +0200
++++ xcsoar-v6.8.17/src/Screen/TopWindow.hpp	2020-12-10 00:09:25.310134447 +0100
+@@ -82,7 +82,7 @@
+ #endif
+ 
+ class TopWindowStyle : public WindowStyle {
+-#if defined(ENABLE_SDL) || defined(USE_X11)
++#if defined(ENABLE_SDL) || defined(USE_X11) || defined(USE_WAYLAND)
+   bool full_screen;
+ #endif
+ #ifdef ENABLE_SDL
+@@ -91,7 +91,7 @@
+ 
+ public:
+   TopWindowStyle()
+-#if defined(ENABLE_SDL) || defined(USE_X11)
++#if defined(ENABLE_SDL) || defined(USE_X11) || defined(USE_WAYLAND)
+     :full_screen(false)
+ #endif
+ #ifdef ENABLE_SDL
+@@ -103,7 +103,7 @@
+ 
+   TopWindowStyle(const WindowStyle other)
+     :WindowStyle(other)
+-#if defined(ENABLE_SDL) || defined(USE_X11)
++#if defined(ENABLE_SDL) || defined(USE_X11) || defined(USE_WAYLAND)
+     , full_screen(false)
+ #endif
+ #ifdef ENABLE_SDL
+@@ -114,13 +114,13 @@
+   }
+ 
+   void FullScreen() {
+-#if defined(ENABLE_SDL) || defined(USE_X11)
++#if defined(ENABLE_SDL) || defined(USE_X11) || defined(USE_WAYLAND)
+     full_screen = true;
+ #endif
+   }
+ 
+   bool GetFullScreen() const {
+-#if defined(ENABLE_SDL) || defined(USE_X11)
++#if defined(ENABLE_SDL) || defined(USE_X11) || defined(USE_WAYLAND)
+     return full_screen;
+ #else
+     return false;
+diff -Naur xcsoar-v6.8.17.orig/src/Screen/Wayland/TopWindow.cpp xcsoar-v6.8.17/src/Screen/Wayland/TopWindow.cpp
+--- xcsoar-v6.8.17.orig/src/Screen/Wayland/TopWindow.cpp	2020-12-10 00:26:04.028034987 +0100
++++ xcsoar-v6.8.17/src/Screen/Wayland/TopWindow.cpp	2020-12-10 00:20:06.927095305 +0100
+@@ -72,7 +72,9 @@
+   wl_shell_surface_set_toplevel(shell_surface);
+   wl_shell_surface_set_title(shell_surface, text);
+ 
+-  // TODO: wl_shell_surface_set_fullscreen(shell_surface);
++  if (style.GetFullScreen()) {
++    wl_shell_surface_set_fullscreen(shell_surface, WL_SHELL_SURFACE_FULLSCREEN_METHOD_DEFAULT, 0, NULL);
++  }
+ 
+   native_display = display;
+   native_window = wl_egl_window_create(surface, size.cx, size.cy);
