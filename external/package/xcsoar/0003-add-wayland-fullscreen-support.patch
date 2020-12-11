@@ -1,6 +1,6 @@
 diff -Naur xcsoar-v6.8.17.orig/src/CommandLine.hpp xcsoar-v6.8.17/src/CommandLine.hpp
 --- xcsoar-v6.8.17.orig/src/CommandLine.hpp	2020-09-22 16:46:01.000000000 +0200
-+++ xcsoar-v6.8.17/src/CommandLine.hpp	2020-12-09 23:59:26.809251723 +0100
++++ xcsoar-v6.8.17/src/CommandLine.hpp	2020-12-11 18:27:53.922432837 +0100
 @@ -33,7 +33,7 @@
  
  #ifdef KOBO
@@ -12,7 +12,7 @@ diff -Naur xcsoar-v6.8.17.orig/src/CommandLine.hpp xcsoar-v6.8.17/src/CommandLin
  #else
 diff -Naur xcsoar-v6.8.17.orig/src/Screen/TopWindow.hpp xcsoar-v6.8.17/src/Screen/TopWindow.hpp
 --- xcsoar-v6.8.17.orig/src/Screen/TopWindow.hpp	2020-09-22 16:46:01.000000000 +0200
-+++ xcsoar-v6.8.17/src/Screen/TopWindow.hpp	2020-12-10 00:09:25.310134447 +0100
++++ xcsoar-v6.8.17/src/Screen/TopWindow.hpp	2020-12-11 18:27:53.922432837 +0100
 @@ -82,7 +82,7 @@
  #endif
  
@@ -57,16 +57,47 @@ diff -Naur xcsoar-v6.8.17.orig/src/Screen/TopWindow.hpp xcsoar-v6.8.17/src/Scree
  #else
      return false;
 diff -Naur xcsoar-v6.8.17.orig/src/Screen/Wayland/TopWindow.cpp xcsoar-v6.8.17/src/Screen/Wayland/TopWindow.cpp
---- xcsoar-v6.8.17.orig/src/Screen/Wayland/TopWindow.cpp	2020-12-10 00:26:04.028034987 +0100
-+++ xcsoar-v6.8.17/src/Screen/Wayland/TopWindow.cpp	2020-12-10 00:20:06.927095305 +0100
-@@ -72,7 +72,9 @@
-   wl_shell_surface_set_toplevel(shell_surface);
+--- xcsoar-v6.8.17.orig/src/Screen/Wayland/TopWindow.cpp	2020-12-11 18:27:11.718361430 +0100
++++ xcsoar-v6.8.17/src/Screen/Wayland/TopWindow.cpp	2020-12-11 18:28:00.090443207 +0100
+@@ -28,6 +28,8 @@
+ 
+ #include <stdio.h>
+ 
++static PixelSize conf_size;
++
+ static void
+ handle_ping(void *data, struct wl_shell_surface *shell_surface,
+             uint32_t serial)
+@@ -39,6 +41,7 @@
+ handle_configure(void *data, struct wl_shell_surface *shell_surface,
+                  uint32_t edges, int32_t width, int32_t height)
+ {
++  conf_size = { width, height};
+ }
+ 
+ static void
+@@ -69,13 +72,21 @@
+   auto shell_surface = wl_shell_get_shell_surface(shell, surface);
+   wl_shell_surface_add_listener(shell_surface,
+                                 &shell_surface_listener, nullptr);
+-  wl_shell_surface_set_toplevel(shell_surface);
++  if (style.GetFullScreen()) {
++    wl_shell_surface_set_fullscreen(shell_surface, WL_SHELL_SURFACE_FULLSCREEN_METHOD_DEFAULT, 0, nullptr);
++  } else {
++    wl_shell_surface_set_toplevel(shell_surface);
++  }
    wl_shell_surface_set_title(shell_surface, text);
  
 -  // TODO: wl_shell_surface_set_fullscreen(shell_surface);
-+  if (style.GetFullScreen()) {
-+    wl_shell_surface_set_fullscreen(shell_surface, WL_SHELL_SURFACE_FULLSCREEN_METHOD_DEFAULT, 0, NULL);
-+  }
++  // get actual size via handle_configure (for fullscreen mode)
++  // TODO: the use of static init_size is not thead safe
++  conf_size = size;
++  wl_display_dispatch(display);
++  wl_display_roundtrip(display);
  
    native_display = display;
-   native_window = wl_egl_window_create(surface, size.cx, size.cy);
+-  native_window = wl_egl_window_create(surface, size.cx, size.cy);
++  native_window = wl_egl_window_create(surface, conf_size.cx, conf_size.cy);
+   if (native_window == EGL_NO_SURFACE) {
+     fprintf(stderr, "Failed to create Wayland EGL window\n");
+     exit(EXIT_FAILURE);
