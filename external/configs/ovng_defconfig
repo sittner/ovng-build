@@ -21,6 +21,7 @@ BR2_LINUX_KERNEL_DTS_SUPPORT=y
 BR2_LINUX_KERNEL_INTREE_DTS_NAME="am335x-bone am335x-boneblack am335x-bonegreen am335x-bonegreen-wireless am335x-boneblue am335x-boneblack-uboot am335x-boneblack-uboot-univ am335x-bonegreen-wireless-uboot-univ am335x-bone-uboot-univ"
 BR2_LINUX_KERNEL_INSTALL_TARGET=y
 BR2_PACKAGE_LINUX_TOOLS_IIO=y
+BR2_PACKAGE_BUSYBOX_CONFIG_FRAGMENT_FILES="$(BR2_EXTERNAL_OVNG_PATH)/board/ovng/busybox-ipc-syslog.config"
 BR2_PACKAGE_BUSYBOX_SHOW_OTHERS=y
 BR2_PACKAGE_ALSA_UTILS=y
 BR2_PACKAGE_ALSA_UTILS_APLAY=y
