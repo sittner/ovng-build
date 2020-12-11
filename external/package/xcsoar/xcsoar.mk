@@ -9,7 +9,7 @@ XCSOAR_SITE = https://github.com/XCSoar/XCSoar.git
 XCSOAR_SITE_METHOD = git
 XCSOAR_LICENSE = GPL-2.0
 XCSOAR_LICENSE_FILES = COPYING
-XCSOAR_DEPENDENCIES += zlib freetype libpng jpeg openssl libcurl librsvg imagemagick gettext dejavu boost sdl2
+XCSOAR_DEPENDENCIES += zlib freetype libpng jpeg openssl libcurl librsvg imagemagick gettext dejavu boost
 
 XCSOAR_MAKE = $(TARGET_MAKE_ENV) $(MAKE) \
 	TARGET=WAYLAND \
