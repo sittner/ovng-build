@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# Starts weston touchscreen calib on first run.
+#
+
+# Allow a few customizations from a config file
+test -r /etc/default/wayland_env && . /etc/default/wayland_env
+
+case "$1" in
+  start)
+	if [ ! -f "$WESTON_TOUCH_CALIB" ]; then
+		weston-touch-calibrator "$WESTON_TOUCH_DEV"
+	fi
+	;;
+  stop)
+	stop
+	;;
+  restart|reload)
+	restart
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+

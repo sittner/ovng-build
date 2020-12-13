@@ -1,0 +1,7 @@
+if [ -n "$XDG_CONFIG_HOME" ]; then
+  mkdir -p "$XDG_CONFIG_HOME"
+  cp /etc/weston.ini "$XDG_CONFIG_HOME"
+fi
+
+WESTON_ARGS=""
+

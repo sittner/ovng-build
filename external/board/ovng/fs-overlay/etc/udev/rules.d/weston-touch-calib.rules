@@ -1,0 +1,1 @@
+ACTION=="add|change",SUBSYSTEM=="input",ENV{DEVPATH}=="/devices/platform/ocp/44e0d000.tscadc/TI-am335x-tsc.0.auto/input/input0/event0",IMPORT{file}="/var/rw/weston/touch.calib"

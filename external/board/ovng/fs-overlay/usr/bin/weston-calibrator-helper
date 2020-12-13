@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+SYSPATH="$1"
+MATRIX="$2 $3 $4 $5 $6 $7"
+
+. /etc/default/wayland_env
+
+[ "$SYSPATH" != "$WESTON_TOUCH_DEV" ] && exit 1
+
+echo "LIBINPUT_CALIBRATION_MATRIX=\"$MATRIX\"" >"$WESTON_TOUCH_CALIB"
+
