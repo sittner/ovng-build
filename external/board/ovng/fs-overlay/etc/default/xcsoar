@@ -1,1 +1,1 @@
-XCSOAR_ARGS="-fly -dpi=192 -800x480"
+XCSOAR_ARGS="-fly -fullscreen -datapath=/var/rw/xcsoar"

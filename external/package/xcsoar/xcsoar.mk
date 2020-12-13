@@ -33,9 +33,9 @@ define XCSOAR_INSTALL_TARGET_CMDS
 	$(XCSOAR_MAKE) -C $(@D) install-bin install-mo
 endef
 
-#define XCSOAR_INSTALL_INIT_SYSV
-#       $(INSTALL) -D -m 755 $(BR2_EXTERNAL_OVNG_PATH)/package/xcsoar/S90xcsoar $(TARGET_DIR)/etc/init.d/S90xcsoar
-#endef
+define XCSOAR_INSTALL_INIT_SYSV
+       $(INSTALL) -D -m 755 $(BR2_EXTERNAL_OVNG_PATH)/package/xcsoar/S90xcsoar $(TARGET_DIR)/etc/init.d/S90xcsoar
+endef
 
 $(eval $(generic-package))
 
