@@ -18,7 +18,19 @@ start() {
 
 	start-stop-daemon -S -q -b -m -p /var/run/weston.pid \
 		--exec /usr/bin/weston -- $WESTON_ARGS
-	[ $? = 0 ] && echo "OK" || echo "FAIL"
+	if [ $? != 0 ]; then
+		echo "FAIL"
+		exit 1
+	fi
+
+	timeout=50
+	while [ $((timeout--)) -gt 0 -a ! -S "${XDG_RUNTIME_DIR}/wayland-0" ]; do sleep 0.1; done
+	if [ $timeout -le 0 ]; then
+		echo "TIMEOUT"
+		exit 1
+	fi
+
+	echo "OK"
 }
 
 stop() {
