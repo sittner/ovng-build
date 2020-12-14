@@ -3,5 +3,5 @@ if [ -n "$XDG_CONFIG_HOME" ]; then
   cp /etc/weston.ini "$XDG_CONFIG_HOME"
 fi
 
-WESTON_ARGS=""
+WESTON_ARGS="--tty=4 --idle-time=0"
 

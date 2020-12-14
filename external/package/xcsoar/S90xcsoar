@@ -3,8 +3,8 @@
 DAEMON="xcsoar"
 PIDFILE="/var/run/$DAEMON.pid"
 
-# shellcheck source=/dev/null
 [ -r "/etc/default/$DAEMON" ] && . "/etc/default/$DAEMON"
+[ -r "/etc/default/wayland_env" ] && . "/etc/default/wayland_env"
 
 start() {
 	printf 'Starting %s: ' "$DAEMON"
