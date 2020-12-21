@@ -26,7 +26,7 @@ grep "^$MMC_DEVICE" /proc/mounts | while read dev mp fs opts; do
 done
 
 echo "Creating partitions..."
-dd if=/dev/zero of=$MMC_DEVICE bs=512 count=2
+dd if=/dev/zero of="$MMC_DEVICE" bs=512 count=2048
 sfdisk $MMC_DEVICE << EOF
 ,10MiB,e,*
 ,512MiB,83
