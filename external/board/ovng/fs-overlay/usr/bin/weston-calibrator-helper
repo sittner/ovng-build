@@ -9,5 +9,6 @@ MATRIX="$2 $3 $4 $5 $6 $7"
 
 [ "$SYSPATH" != "$WESTON_TOUCH_DEV" ] && exit 1
 
+mkdir -p `dirname "$WESTON_TOUCH_CALIB"`
 echo "LIBINPUT_CALIBRATION_MATRIX=\"$MATRIX\"" >"$WESTON_TOUCH_CALIB"
 
