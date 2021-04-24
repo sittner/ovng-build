@@ -1,19 +1,40 @@
-diff -Naur xcsoar-v6.8.12.orig/src/Device/Driver/OpenVario.cpp xcsoar-v6.8.12/src/Device/Driver/OpenVario.cpp
---- xcsoar-v6.8.12.orig/src/Device/Driver/OpenVario.cpp	2019-04-30 22:09:20.000000000 +0200
-+++ xcsoar-v6.8.12/src/Device/Driver/OpenVario.cpp	2019-06-27 10:24:22.603231109 +0200
-@@ -62,6 +62,11 @@
+diff -Naur xcsoar-v6.8.17.orig/src/Device/Driver/OpenVario.cpp xcsoar-v6.8.17/src/Device/Driver/OpenVario.cpp
+--- xcsoar-v6.8.17.orig/src/Device/Driver/OpenVario.cpp	2020-09-22 16:46:01.000000000 +0200
++++ xcsoar-v6.8.17/src/Device/Driver/OpenVario.cpp	2021-01-06 09:27:49.303331534 +0100
+@@ -35,6 +35,7 @@
+   bool ParseNMEA(const char *line, NMEAInfo &info) override;
+ 
+   static bool POV(NMEAInputLine &line, NMEAInfo &info);
++  static bool POVAHRS(NMEAInputLine &line, NMEAInfo &info);
+ };
+ 
+ bool
+@@ -44,9 +45,15 @@
+     return false;
+ 
+   NMEAInputLine line(_line);
+-  if (line.ReadCompare("$POV"))
++  char type[16];
++  line.Read(type, sizeof(type));
++
++  if (StringIsEqual(type, "$POV"))
+     return POV(line, info);
+ 
++  if (StringIsEqual(type, "$POVAHRS"))
++    return POVAHRS(line, info);
++
+   return false;
+ }
+ 
+@@ -62,6 +69,7 @@
     * R: total pressure in hPa
     * S: true airspeed in km/h
     * T: temperature in deg C
 +   * V: battery voltage in V
-+   * b: bank_angle in degrees
-+   * p: pitch_angle in degrees 
-+   * h: heading in degrees 
-+   * g: G load
     */
  
    while (!line.IsEmpty()) {
-@@ -103,6 +108,30 @@
+@@ -103,11 +111,44 @@
          info.temperature_available = true;
          break;
        }
@@ -22,25 +43,39 @@ diff -Naur xcsoar-v6.8.12.orig/src/Device/Driver/OpenVario.cpp xcsoar-v6.8.12/sr
 +        info.voltage_available.Update(info.clock);
 +        break;
 +      }
-+      case 'b': {
-+        info.attitude.bank_angle_available.Update(info.clock);
-+        info.attitude.bank_angle = Angle::Degrees(value);
-+        break;
-+      }
-+      case 'p': {
-+        info.attitude.pitch_angle_available.Update(info.clock);
-+        info.attitude.pitch_angle = Angle::Degrees(value);
-+        break;
-+      }
-+      case 'h': {
-+        info.attitude.heading_available.Update(info.clock);
-+        info.attitude.heading = Angle::Degrees(value);
-+        break;
-+      }
-+      case 'g': {
-+        info.acceleration.ProvideGLoad(value, true);
-+        break;
-+      }
      }
    }
  
+   return true;
+ }
++
++bool
++OpenVarioDevice::POVAHRS(NMEAInputLine &line, NMEAInfo &info)
++{
++  fixed roll, pitch, yaw, gload;
++  int mag_yaw;
++
++  if (!line.ReadChecked(roll)) return false;
++  if (!line.ReadChecked(pitch)) return false;
++  if (!line.ReadChecked(yaw)) return false;
++  if (!line.ReadChecked(mag_yaw)) return false;
++  if (!line.ReadChecked(gload)) return false;
++
++  info.attitude.bank_angle_available.Update(info.clock);
++  info.attitude.bank_angle = Angle::Degrees(roll);
++
++  info.attitude.pitch_angle_available.Update(info.clock);
++  info.attitude.pitch_angle = Angle::Degrees(pitch);
++
++  if (mag_yaw) {
++    info.attitude.heading_available.Update(info.clock);
++    info.attitude.heading = Angle::Degrees(yaw);
++  }
++
++  info.acceleration.ProvideGLoad(gload, true);
++
++  return true;
++}
+ 
+ static Device *
+ OpenVarioCreateOnPort(const DeviceConfig &config, Port &com_port)
