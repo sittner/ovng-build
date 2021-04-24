@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-OVNGD_VERSION = b4a617f4b1c85e1a069acc2e4db1957370a60f98
+OVNGD_VERSION = 0de832c03b8e40bcd31eb2b6a408bcfd6abd5f04
 OVNGD_SITE = https://github.com/sittner/ovngd.git
 OVNGD_SITE_METHOD = git
 OVNGD_LICENSE = GPL-2.0
