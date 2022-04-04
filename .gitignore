@@ -2,3 +2,4 @@
 /build
 /downloads
 /**/*.FCStd1
+/**/*.kicad_pcb-bak
