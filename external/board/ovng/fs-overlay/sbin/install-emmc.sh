@@ -28,7 +28,7 @@ done
 echo "Creating partitions..."
 dd if=/dev/zero of="$MMC_DEVICE" bs=512 count=2048
 sfdisk $MMC_DEVICE << EOF
-,10MiB,e,*
+,10MiB,c,*
 ,512MiB,83
 ,512MiB,83
 ,,83
@@ -46,6 +46,24 @@ mkfs.ext4 -F -L data "$MMC_DEVICE"p4
 
 mkdir -p $MNTDIR/src
 mkdir -p $MNTDIR/dst
+
+echo "Installing boot files..."
+mount -o ro "$SRC_DEVICE"p1 $MNTDIR/src
+mount "$MMC_DEVICE"p1 $MNTDIR/dst
+cp -a $MNTDIR/src/* $MNTDIR/dst
+echo "$MNTDIR/dst/uboot.env 0x0000 0x20000" >$MNTDIR/fw_env.config
+fw_setenv -c $MNTDIR/fw_env.config mmcdev 1
+sync
+umount $MNTDIR/dst
+umount $MNTDIR/src
+
+echo "Installing root file system..."
+mount -o ro / $MNTDIR/src
+mount "$MMC_DEVICE"p2 $MNTDIR/dst
+cp -a $MNTDIR/src/* $MNTDIR/dst
+sync
+umount $MNTDIR/dst
+umount $MNTDIR/src
 
 echo "Installing xcsoar basic data"
 mount "$MMC_DEVICE"p4 $MNTDIR/dst
