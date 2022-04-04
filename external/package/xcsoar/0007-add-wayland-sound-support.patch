@@ -1,0 +1,27 @@
+diff -Naur xcsoar-v6.8.17.orig/build/libaudio.mk xcsoar-v6.8.17/build/libaudio.mk
+--- xcsoar-v6.8.17.orig/build/libaudio.mk	2020-09-22 16:46:01.000000000 +0200
++++ xcsoar-v6.8.17/build/libaudio.mk	2021-06-18 20:19:41.782391833 +0200
+@@ -12,6 +12,11 @@
+ HAVE_PCM_PLAYER = y
+ endif
+ 
++ifeq ($(USE_WAYLAND),y)
++HAVE_PCM_PLAYER = y
++$(eval $(call pkg-config-library,SDL,sdl))
++endif
++
+ ifeq ($(HAVE_PCM_PLAYER),y)
+ 
+ AUDIO_SRC_DIR = $(SRC)/Audio
+diff -Naur xcsoar-v6.8.17.orig/src/Audio/Features.hpp xcsoar-v6.8.17/src/Audio/Features.hpp
+--- xcsoar-v6.8.17.orig/src/Audio/Features.hpp	2020-09-22 16:46:01.000000000 +0200
++++ xcsoar-v6.8.17/src/Audio/Features.hpp	2021-06-18 20:02:32.024962059 +0200
+@@ -30,7 +30,7 @@
+ #ifndef XCSOAR_AUDIO_FEATURES_HPP
+ #define XCSOAR_AUDIO_FEATURES_HPP
+ 
+-#if !defined(KOBO) && (defined(ENABLE_SDL) || defined(ANDROID))
++#if !defined(KOBO) && (defined(ENABLE_SDL) || defined(ANDROID) || defined(USE_WAYLAND))
+ #define HAVE_PCM_PLAYER
+ #endif
+ 
